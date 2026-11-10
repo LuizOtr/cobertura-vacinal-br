@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cobertura vacinal infantil por município</title>
+<meta name="description" content="Painel interativo sobre a cobertura vacinal de crianças de 1 ano nos municípios brasileiros, com dados abertos do Ministério da Saúde.">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="painel">
+    <header class="painel-cabecalho">
+      <p class="etiqueta">Previne Brasil, 2024</p>
+      <h1>Cobertura vacinal de crianças de 1 ano</h1>
+      <p class="subtitulo">Quantos municípios alcançam a meta de 95% e onde estão as maiores lacunas? Ajuste os filtros e tudo se recalcula na hora.</p>
+    </header>
+
+    <div class="status" id="status-carregando">
+      <p id="status-progresso">Buscando os dados do Ministério da Saúde…</p>
+      <div class="barra"><div class="barra-preenche" id="barra-preenche"></div></div>
+    </div>
+    <p class="erro" id="status-erro" hidden></p>
+
+    <div class="filtros">
+      <label class="campo">
+        <span>Estado</span>
+        <select id="filtro-uf"></select>
+      </label>
+      <label class="campo">
+        <span>Município</span>
+        <select id="filtro-municipio"></select>
+      </label>
+      <label class="campo">
+        <span>Indicador</span>
+        <select id="filtro-indicador"></select>
+      </label>
+      <label class="campo">
+        <span>Quadrimestre</span>
+        <select id="filtro-quadrimestre"></select>
+      </label>
+      <label class="campo">
+        <span>Visão da equipe</span>
+        <select id="filtro-visao">
+          <option value="geral">Geral</option>
+          <option value="homologadas">Homologadas</option>
+          <option value="validas">Válidas</option>
+        </select>
+      </label>
+      <label class="campo">
+        <span>Denominador mínimo: <b id="min-den-valor">20</b></span>
+        <input type="range" id="filtro-min-den" min="0" max="300" step="10" value="20">
+      </label>
+      <button class="botao" id="botao-recarregar">Baixar os dados de novo</button>
+    </div>
+
+    <div class="insights" id="insights"></div>
+
+    <footer class="painel-rodape">
+      <p>Fonte: API de Dados Abertos do Ministério da Saúde, base de indicadores do Previne Brasil. Malha municipal do IBGE.</p>
+    </footer>
+  </aside>
+
+  <main class="conteudo">
+    <section class="kpis" id="kpis"></section>
+
+    <section class="cartao">
+      <h2>Como as coberturas se distribuem</h2>
+      <p class="legenda-cartao">Cada coluna conta municípios por faixa de cobertura. A linha tracejada marca a meta de 95%.</p>
+      <div id="grafico-histograma"></div>
+    </section>
+
+    <div class="dupla">
+      <section class="cartao">
+        <h2>Cobertura ao longo de 2024</h2>
+        <p class="legenda-cartao">Mediana da cobertura e fatia de municípios que alcançam a meta, por quadrimestre.</p>
+        <div id="grafico-serie"></div>
+      </section>
+      <section class="cartao">
+        <h2>Mapa municipal</h2>
+        <p class="legenda-cartao">Cada município pintado pela cobertura estimada no recorte atual.</p>
+        <div id="grafico-mapa"></div>
+      </section>
+    </div>
+
+    <div class="dupla">
+      <section class="cartao">
+        <h2>Coberturas mais baixas</h2>
+        <p class="legenda-cartao">As barras mostram o intervalo de confiança de 95% de cada município.</p>
+        <div id="grafico-baixos"></div>
+      </section>
+      <section class="cartao">
+        <h2>Coberturas mais altas</h2>
+        <p class="legenda-cartao">Intervalo de confiança de 95%. Um município pequeno pode chegar ao topo por acaso.</p>
+        <div id="grafico-altos"></div>
+      </section>
+    </div>
+
+    <section class="cartao">
+      <h2>Município por município</h2>
+      <p class="legenda-cartao" id="contagem-tabela"></p>
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr>
+              <th>Município</th><th>UF</th><th class="num">Vacinados</th><th class="num">Denominador</th>
+              <th class="num">Cobertura</th><th class="num">IC 95%</th><th>Teste contra a meta</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-tabela"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="cartao">
+      <h2>O que os números dizem e o que não dizem</h2>
+      <div id="conclusao" class="conclusao"></div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/stats.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/charts.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
