@@ -69,6 +69,7 @@ assets/js/map.js      coroplético municipal em SVG
 assets/js/app.js      estado, filtros e render
 worker/               Cloudflare Worker
 relay/                relay Node
+docs/                 histórico do trabalho
 ```
 
 Malha municipal: IBGE, malhas v2, qualidade mínima.
