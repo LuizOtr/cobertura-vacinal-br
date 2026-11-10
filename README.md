@@ -24,8 +24,8 @@ A API do Ministério da Saúde não envia cabeçalho `Access-Control-Allow-Origi
 
 O painel lê os dados por um relay que só repassa a API do Ministério e acrescenta o cabeçalho de CORS. Há duas implementações no repositório, com o mesmo comportamento:
 
-- `worker/` — Cloudflare Worker. É o caminho recomendado. O app continua estático no GitHub Pages e o Worker só repassa e cacheia no edge.
-- `relay/` — relay em Node, sem dependências, para quem preferir rodar em servidor próprio atrás de um túnel.
+- `worker/`, um Cloudflare Worker. É o caminho recomendado. O app continua estático no GitHub Pages e o Worker só repassa e cacheia no edge.
+- `relay/`, um relay em Node sem dependências, para quem preferir rodar em servidor próprio atrás de um túnel.
 
 O endereço do relay fica em uma linha de `assets/js/config.js`:
 

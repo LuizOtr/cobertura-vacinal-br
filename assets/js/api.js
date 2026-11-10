@@ -103,7 +103,7 @@ const Api = (() => {
       });
       db.close();
     } catch (e) {
-      /* cache é otimização, falha não interrompe */
+      return;
     }
   }
 
